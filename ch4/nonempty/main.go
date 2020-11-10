@@ -11,6 +11,9 @@ func main() {
 	fmt.Println("Removing adjacent duplicate strings")
 	str = []string{"one", "two", "two", "three", "three"}
 	fmt.Println(removeAdjucentDuplicate(str))
+
+	fmt.Println("Using Deduplication in one pass")
+	fmt.Println(deduplication(str))
 }
 
 func nonempty(str []string) []string {
@@ -37,4 +40,18 @@ func removeAdjucentDuplicate(str []string) []string {
 		prev = v
 	}
 	return str[:cnt]
+}
+
+// deduplication - one pass using map
+func deduplication(str []string) []string {
+	var out []string
+	temp := make(map[string]string)
+
+	for _, v := range str {
+		if _, ok := temp[v]; !ok {
+			temp[v] = ""
+			out = append(out, v)
+		}
+	}
+	return out
 }
